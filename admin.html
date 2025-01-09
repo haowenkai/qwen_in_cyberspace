@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理面板</title>
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+    <h1>管理面板</h1>
+    <section id="visits">
+        <h2>访问量统计</h2>
+        <p>总访问量：<span id="total-visits">加载中...</span></p>
+    </section>
+    <section id="uptime">
+        <h2>服务器运行时间</h2>
+        <p>服务器已运行：<span id="server-uptime">加载中...</span></p>
+    </section>
+    <script>
+        fetch('/visits')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('total-visits').textContent = data.totalVisits;
+            });
+
+        fetch('/uptime')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('server-uptime').textContent = data.uptime;
+            });
+    </script>
+</body>
+</html>
